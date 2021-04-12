@@ -14,19 +14,19 @@
         </div>
         <div class="field">
           <h3>postal</h3>
-          <%= f.text_field :email, autofocus: true, class: "email" %>
+          <%= f.text_field :postal, autofocus: true, class: "email", id: 'postal' %>
         </div>
         <div class="field">
           <h3>prefecture</h3>
-          <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name %>
+          <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name %>
         </div>
         <div class="field">
           <h3>city</h3>
-          <%= f.text_field :city %>
+          <%= f.text_field :city, id: 'city' %>
         </div>
         <div class="field">
           <h3>street</h3>
-          <%= f.text_field :street %>
+          <%= f.text_field :street, id: 'street' %>
         </div>
         <div class="field">
           <%= f.label :password %>
@@ -47,3 +47,19 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript" src="//jpostal-1006.appspot.com/jquery.jpostal.js"></script>
+<script>
+
+  $(window).ready( function() {
+
+  $("#postal").jpostal({
+    postcode : ["#postal"],
+    address : { 
+      "#user_prefecture_code" : "%3",
+      "#city" : "%4",
+      "#street" : "%5%6%7"
+    }
+  });
+});
+</script>
