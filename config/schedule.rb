@@ -8,7 +8,7 @@
 set :output, "/home/ec2-user/environment/DWC__bookers7-10/log/cron_log.log"
 set :environment, :development
 #
-every 1.minutes do
+every 1.days do
   runner "User.daily_email_sent"
 end
 #
