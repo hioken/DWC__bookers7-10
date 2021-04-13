@@ -9,4 +9,11 @@ class User < ApplicationRecord
 
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
   validates :introduction, length: {maximum: 50}
+  
+  def self.daily_email_sent
+    puts 'done'
+    self.all.pluck(:email).each do |email|
+      DailyMailer.with(email: email).daily_email.deliver_now
+    end
+  end
 end
