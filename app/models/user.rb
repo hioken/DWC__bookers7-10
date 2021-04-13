@@ -11,8 +11,9 @@ class User < ApplicationRecord
   validates :introduction, length: {maximum: 50}
   
   def self.daily_email_sent
+    puts 'done'
     self.all.pluck(:email).each do |email|
-      DailyMailer.with(email: email).daily_email.deliver_later
+      DailyMailer.with(email: email).daily_email.deliver_now
     end
   end
 end
