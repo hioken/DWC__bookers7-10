@@ -70,3 +70,4 @@ gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.13'
 gem 'whenever', require: false
 gem 'dotenv-rails'
+gem 'whenever', require: false
