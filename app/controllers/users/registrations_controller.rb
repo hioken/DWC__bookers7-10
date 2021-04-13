@@ -11,8 +11,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    begin
     super
     ThanksMailer.with(name: resource.name, email: resource.email).welcome_email.deliver_later
+	  rescue => e
+	  #e.exception_log
+		  p '-------------------------------------------------------'
+		  p '-------------------------------------------------------'
+		  p '-------------------------------------------------------'
+	    p e
+		  p '-------------------------------------------------------'
+		  p '-------------------------------------------------------'
+		  p '-------------------------------------------------------'
+    else
+		  p '-------------------------------------------------------'
+		  p '-------------------------------------------------------'
+		  p '-------------------------------------------------------'
+		  p 'successfully'
+		  p '-------------------------------------------------------'
+		  p '-------------------------------------------------------'
+		  p '-------------------------------------------------------'
+		end
   end
 
   # GET /resource/edit
@@ -60,4 +79,35 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
+end
+
+class Exception
+  def exception_log(tracing: true)
+    text = "\n"
+    text << "\tError:    #{self.class}\n"
+    text << "\tModel:    #{self.record.class}\n" if self.class.name.deconstantize == "ActiveRecord" && self.respond_to?(:record)
+    text << "\tMassage:  #{self.message}\n"
+      
+    if tracing
+      text << "\tBacktrace:\n"
+      p self.class
+      limit = ((self.class == ActiveRecord::RecordInvalid || self.class == ArgumentError) ? 16 : 30) # backtraceの出力行数
+      cnt = 0
+      self.backtrace.each do |trace|
+        next unless trace.match?(/\/app\//)
+        text << "\t\t" + trace + "\n"
+        cnt += 1
+        if cnt > limit
+          cnt = "over #{limit}"
+          text << "\t\t......\n"
+          break
+        end
+      end
+      text << "\ttrace_count: #{cnt.to_s}\n"
+    else
+      text << "\tBacktrace:  none\n"
+    end
+    Rails.application.config.exception_logger.info(text)
+  end
 end
