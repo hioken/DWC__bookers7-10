@@ -36,3 +36,18 @@ div {
     margin-bottom: 10px;
   }
 }
+
+.chat_text_box {
+  border: 1px black;
+  padding: 4px;
+  width: 60%;
+  
+}
+
+.chat_mine {
+  margin: 0 0 0 auto;
+}
+
+.chat_text {
+  overflow-wrap: break-word;
+}

@@ -1,0 +1,6 @@
+<% chats.each do |chat| %>
+  <% html_class = (chat.user_id == current_user.id ? 'chat_mine' : 'chat_companion') %>
+  <div class="chat_text_box <%= html_class %>">
+    <span class="chat_text"><%= chat.text %></span>
+  </div>
+<% end %>

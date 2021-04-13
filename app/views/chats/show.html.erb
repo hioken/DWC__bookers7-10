@@ -1,0 +1,9 @@
+<div class='container px-5 px-sm-0'>
+  <div id="chat_space" class="row chat_box">
+    <%= render 'chats', chats: @chats %>
+  </div>
+  <%= form_with model: [@room, Chat.new], class: 'chat_form_tag' do |f| %>
+    <%= f.text_area :text, id: 'chat_form' %>
+    <%= f.submit %>
+  <% end %>
+</div>
