@@ -1,7 +1,7 @@
 class DailyMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: ENV['FROM_MAIL']
   
   def daily_email
-    mail(to: params[:email])
+    mail(to: params[:email]) { |format| format.text }
   end
 end
